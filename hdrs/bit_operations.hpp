@@ -6,7 +6,7 @@
 /*   By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:28:05 by Pablo Escob       #+#    #+#             */
-/*   Updated: 2024/12/15 23:01:55 by Pablo Escob      ###   ########.fr       */
+/*   Updated: 2024/12/15 23:29:55 by Pablo Escob      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ class BitOperations
 		BYTE_SIZE = 8
 	};
 	public:
-		static void	set_bit(t_own &data, unsigned int bit_position)
+		static void	set_bit(t_own &data, t_own bit_position)
 		{
 			if (bit_position >= sizeof(t_own) * BYTE_SIZE)
 				bit_position = sizeof(t_own);
 			data |= (t_own)BIT_SET << bit_position;
 		}
 
-		static t_own	read_bit(t_own &data, unsigned int bit_position)
+		static t_own	read_bit(t_own &data, t_own bit_position)
 		{
 			if (bit_position >= sizeof(t_own) * BYTE_SIZE)
 				bit_position = sizeof(t_own);
@@ -36,7 +36,7 @@ class BitOperations
 			return BIT_CLEAR; 
 		}
 
-		static void	clear_bit(t_own &data, unsigned int bit_position)
+		static void	clear_bit(t_own &data, t_own bit_position)
 		{
 			if (bit_position >= sizeof(t_own) * BYTE_SIZE)
 				bit_position = sizeof(t_own);
