@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bit_operations.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+        */
+/*   By: black <black@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:28:05 by Pablo Escob       #+#    #+#             */
-/*   Updated: 2024/12/15 23:29:55 by Pablo Escob      ###   ########.fr       */
+/*   Updated: 2024/12/16 07:24:21 by black            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-template <typename t_own>
+using uint8_t = unsigned char;
+
 class BitOperations
 {
 	enum e_bit_data_t
@@ -20,26 +21,25 @@ class BitOperations
 		BYTE_SIZE = 8
 	};
 	public:
-		static void	set_bit(t_own &data, t_own bit_position)
+		template <typename t_own>
+		static void	set_bit(t_own &data, uint8_t bit_position)
 		{
 			if (bit_position >= sizeof(t_own) * BYTE_SIZE)
 				bit_position = sizeof(t_own);
-			data |= (t_own)BIT_SET << bit_position;
+			data |= static_cast<t_own>(BIT_SET) << bit_position;
 		}
-
-		static t_own	read_bit(t_own &data, t_own bit_position)
+		template <typename t_own>
+		static t_own	read_bit(t_own &data, uint8_t bit_position)
 		{
 			if (bit_position >= sizeof(t_own) * BYTE_SIZE)
 				bit_position = sizeof(t_own);
-			if (data & ((t_own)BIT_SET << bit_position))
-				return BIT_SET;
-			return BIT_CLEAR; 
+			return (data & static_cast<t_own>(BIT_SET) << bit_position) >> bit_position;
 		}
-
-		static void	clear_bit(t_own &data, t_own bit_position)
+		template <typename t_own>
+		static void	clear_bit(t_own &data, uint8_t bit_position)
 		{
 			if (bit_position >= sizeof(t_own) * BYTE_SIZE)
 				bit_position = sizeof(t_own);
-			data &= ~((t_own)BIT_SET << bit_position);
+			data &= ~(static_cast<t_own>(BIT_SET) << bit_position);
 		}
 };
